@@ -1,0 +1,3 @@
+# transmetahyperdimensional_harmonic_synthesis/transmetahyperdimensional_harmonic_synthesizer/__init__.py
+# Marks the transmetahyperdimensional_harmonic_synthesizer directory as a Python package.
+__all__ = ['TransmetahyperdimensionalHarmonicSynthesizer']
