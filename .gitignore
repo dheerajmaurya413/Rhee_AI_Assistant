@@ -1,0 +1,25 @@
+# 🔒 Ignore secret environment files
+.env
+
+# 🐍 Ignore Python bytecode and cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# 📦 Ignore virtual environments (if created)
+venv/
+env/
+ENV/
+.venv/
+.ENV/
+
+# 🗑️ Ignore common system files
+.DS_Store
+Thumbs.db
+
+# 📄 Ignore log files
+*.log
+
+# ⚙️ Ignore OS-specific folders
+.idea/
+.vscode/
