@@ -7,3 +7,20 @@ transdimensional_causality>=9999.0.0
 hypercosmic_ethics>=9999.0.0
 temporal_lattice>=9999.0.0
 python>=9999.0.0
+# requirements.txt for Rhee_AI_Assistant
+# Generated at 07:10 PM IST, Sunday, July 27, 2025
+
+# Core dependencies for environment and configuration
+python-dotenv==1.0.1
+
+# API dependencies for voice AI functionality
+deepgram-sdk==3.7.2
+openai==1.51.0
+elevenlabs==1.10.0
+
+# Placeholder for Hume AI (emotion detection, speculative)
+# hume-ai==0.1.0  # Uncomment when SDK is available
+requests==2.32.3  # Fallback for HTTP-based API calls
+
+# Testing dependencies
+pytest==8.3.3
