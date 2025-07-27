@@ -31,7 +31,7 @@ class VoiceCore:
         self.stt = deepgram.Deepgram(os.getenv("DEEPGRAM_API_KEY"))
         self.llm = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
         self.logger = logging.getLogger(__name__)
-        self.logger.info("Voice AI agent %s initialized with Deepgram and OpenAI at 05:23 PM IST, Sunday, July 27, 2025", agent_id)
+        self.logger.info("Voice AI agent %s initialized with Deepgram and OpenAI at 06:05 PM IST, Sunday, July 27, 2025", agent_id)
 
     def process_voice_input(self, session_id: str, audio_input: bytes, config: Dict[str, Any]) -> Dict[str, Any]:
         """
@@ -46,27 +46,22 @@ class VoiceCore:
             Dict[str, Any]: Response state including transcribed text, response, audio output, emotion, and agent ID.
         """
         try:
-            # Transcribe audio input using Deepgram
             transcribed_text = self._process_stt(audio_input, config)
-            self.logger.info("Agent %s transcribed voice input for session %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.info("Agent %s transcribed voice input for session %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                              self.agent_id, session_id, transcribed_text)
 
-            # Detect emotion
             emotion = self.emotion_detector.detect_emotion(transcribed_text, audio_input)
-            self.logger.info("Agent %s detected emotion for session %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.info("Agent %s detected emotion for session %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                              self.agent_id, session_id, emotion)
 
-            # Generate response using OpenAI
             response_text = self._generate_response(transcribed_text, config, emotion)
-            self.logger.info("Agent %s generated response for session %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.info("Agent %s generated response for session %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                              self.agent_id, session_id, response_text)
 
-            # Modulate and generate audio output based on emotion
             audio_output = self.voice_manager.generate_audio(response_text, emotion, config)
-            self.logger.info("Agent %s generated audio output for session %s with emotion %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.info("Agent %s generated audio output for session %s with emotion %s at 06:05 PM IST, Sunday, July 27, 2025",
                              self.agent_id, session_id, emotion)
 
-            # Store conversation state with agent ID
             self.conversation_states[session_id] = {
                 "agent_id": self.agent_id,
                 "transcribed_text": transcribed_text,
@@ -82,7 +77,7 @@ class VoiceCore:
 
             return self.conversation_states[session_id]
         except Exception as e:
-            self.logger.error("Agent %s error processing voice input for session %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.error("Agent %s error processing voice input for session %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                               self.agent_id, session_id, e)
             return {}
 
@@ -95,7 +90,7 @@ class VoiceCore:
             )
             return response["results"]["channels"][0]["alternatives"][0]["transcript"]
         except Exception as e:
-            self.logger.error("Agent %s STT processing error: %s at 05:23 PM IST, Sunday, July 27, 2025", self.agent_id, e)
+            self.logger.error("Agent %s STT processing error: %s at 06:05 PM IST, Sunday, July 27, 2025", self.agent_id, e)
             return config.get("mock_transcription", "Hello, how can I assist you today?")
 
     def _generate_response(self, text: str, config: Dict[str, Any], emotion: str) -> str:
@@ -108,11 +103,11 @@ class VoiceCore:
                     {"role": "system", "content": prompt},
                     {"role": "user", "content": text}
                 ],
-                user=self.agent_id  # Include agent_id for OpenAI session tracking
+                user=self.agent_id
             )
             return response.choices[0].message.content
         except Exception as e:
-            self.logger.error("Agent %s LLM response generation error: %s at 05:23 PM IST, Sunday, July 27, 2025", self.agent_id, e)
+            self.logger.error("Agent %s LLM response generation error: %s at 06:05 PM IST, Sunday, July 27, 2025", self.agent_id, e)
             return f"Response to '{text}' in {emotion} tone: I am here to help."
 
     def sync_with_orchestrator(self, session_id: str, config: Dict[str, Any], target_module: str) -> None:
@@ -125,14 +120,14 @@ class VoiceCore:
             target_module (str): Target module (e.g., temporal_integration_nexus).
         """
         try:
-            self.logger.info("Agent %s synchronizing voice agent state for session %s with module %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.info("Agent %s synchronizing voice agent state for session %s with module %s at 06:05 PM IST, Sunday, July 27, 2025",
                              self.agent_id, session_id, target_module)
             self.conversation_states[session_id]["target_module"] = target_module
             self.conversation_states[session_id]["agent_id"] = self.agent_id
             if target_module == "omnitemporal_coherence_lattice.temporal_integration_nexus":
                 self.conversation_states[session_id]["temporal_coherence"] = random.uniform(0.95, 1.0)
         except Exception as e:
-            self.logger.error("Agent %s error syncing session %s with %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.error("Agent %s error syncing session %s with %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                               self.agent_id, session_id, target_module, e)
 
     def get_conversation_state(self, session_id: str) -> Dict[str, Any]:
@@ -147,10 +142,10 @@ class VoiceCore:
         """
         try:
             state = self.conversation_states.get(session_id, {})
-            self.logger.info("Agent %s retrieved conversation state for session %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.info("Agent %s retrieved conversation state for session %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                              self.agent_id, session_id, state)
             return state
         except Exception as e:
-            self.logger.error("Agent %s error retrieving conversation state for %s: %s at 05:23 PM IST, Sunday, July 27, 2025",
+            self.logger.error("Agent %s error retrieving conversation state for %s: %s at 06:05 PM IST, Sunday, July 27, 2025",
                               self.agent_id, session_id, e)
             return {}
